@@ -1,0 +1,23 @@
+{
+    "name": "zigastrgar/orderable",
+    "type": "laravel-package",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "ZigaStrgar",
+            "email": "ziga_strgar@hotmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4" : {
+            "ZigaStrgar\\Orderable\\": "src/"
+        }
+    },
+    "require": {
+        "illuminate/support": "^5.3"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^5.5",
+        "illuminate/database": "^5.3"
+    }
+}
