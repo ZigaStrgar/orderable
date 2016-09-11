@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace ZigaStrgar\Orderable;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
