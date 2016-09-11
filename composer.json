@@ -1,6 +1,8 @@
 {
     "name": "zigastrgar/orderable",
     "type": "laravel-package",
+    "description" : "Ordering package for Laravel 5.x",
+    "homepage" : "https://github.com/ZigaStrgar/orderable",
     "license": "MIT",
     "authors": [
         {
