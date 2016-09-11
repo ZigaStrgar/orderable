@@ -14,6 +14,13 @@ Add the Orderable package to your `composer.json` file.
 }
 ```
 
+OR
+
+Simply run this in command line
+
+```bash
+composer require zigastrgar/orderable
+```
 ## Usage
 
 Go to any model and add this to the model.
@@ -34,19 +41,19 @@ class Article extends Model {
 }
 ```
 
-If you don't use the key like in `user_id` case it will default to `DESC`;
+If you don't use the key like in `user_id` case it will default to `DESC`.
 
 ### Running "Orderable"
 
-It's super simple
+It's super simple.
 
 ```php
-    Article::all();
+Article::all();
 ```
 
 ### Running without "Orderable"
 
 Same. Very simple stuff.
 ```php
-    Article::unorderable();
+Article::unorderable();
 ```
