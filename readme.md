@@ -62,7 +62,7 @@ Article::order(); //Equals to Article::all();
 or
 
 ```php
-Article::order(['title'])
+Article::order(['title']);
 ```
 
 and only rule for `title` will bi applied.
