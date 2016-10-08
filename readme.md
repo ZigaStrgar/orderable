@@ -51,9 +51,36 @@ It's super simple.
 Article::all();
 ```
 
+#### Apply only specific rule
+
+From now on, you can also do something like this.
+
+```php
+Article::order(); //Equals to Article::all();
+```
+
+or
+
+```php
+Article::order(['title'])
+```
+
+and only rule for `title` will bi applied.
+
+
 ### Running without "Orderable"
 
 Same. Very simple stuff.
 ```php
 Article::unorderable();
 ```
+
+No scopes applied.
+
+#### Remove specific rule
+
+```php
+Article::unorderable(['title']);
+```
+
+In this case the rule for title won't be applied.

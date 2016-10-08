@@ -14,7 +14,7 @@ class OrderingScope implements Scope
      *
      * @var array
      */
-    protected $extensions = [ 'Unorderable' ];
+    protected $extensions = [ 'Unorderable', 'Order' ];
 
     /**
      * Apply the scope to a given Eloquent query builder.
@@ -62,16 +62,57 @@ class OrderingScope implements Scope
     }
 
     /**
-     * Add the restore extension to the builder.
+     * Add the order extension to the builder.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $builder
+     */
+    protected function addOrder(Builder $builder)
+    {
+        $builder->macro('order', function(Builder $builder, $things = []) {
+            if ( count($things) == 0 ) {
+                return $builder->applyScopes();
+            }
+            $builder = $builder->getModel()->newQueryWithoutScopes();
+            foreach ( $this->getOrderByRules($builder) as $column => $rule ) {
+                if ( is_numeric($column) ) {
+                    $column = $rule;
+                    $rule   = "DESC";
+                }
+                if ( in_array($column, $things) ) {
+                    $builder->orderBy($column, $rule);
+                }
+            }
+
+            return $builder;
+        });
+    }
+
+    /**
+     * Add the unorderable extension to the builder.
      *
      * @param  \Illuminate\Database\Eloquent\Builder $builder
      *
-     * @return void
+     * @internal param array $things
      */
     protected function addUnorderable(Builder $builder)
     {
-        $builder->macro('unorderable', function(Builder $builder) {
-            return $builder->withoutGlobalScope($this);
+        $builder->macro('unorderable', function(Builder $builder, $things = []) {
+            if ( count($things) == 0 ) {
+                return $builder->withoutGlobalScope($this);
+            }
+            $builder = $builder->getModel()->newQueryWithoutScopes();
+            foreach ( $this->getOrderByRules($builder) as $column => $rule ) {
+                if ( is_numeric($column) ) {
+                    $column = $rule;
+                    $rule   = "DESC";
+                }
+                if ( in_array($column, $things) ) {
+                    continue;
+                }
+                $builder->orderBy($column, $rule);
+            }
+
+            return $builder;
         });
     }
 }
